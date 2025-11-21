@@ -10,7 +10,11 @@ const jsonExample = [
 ];
 
 function validateItem(item) {
-  if (typeof item !== "object" || Object.keys(item).length === 0 || Array.isArray(item))
+  if (
+    typeof item !== "object" ||
+    Object.keys(item).length === 0 ||
+    Array.isArray(item)
+  )
     return false;
   return true;
 }
