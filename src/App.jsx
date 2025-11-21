@@ -1,6 +1,5 @@
 // import { useState } from "react";
 import "./App.css";
-import Textbox from "./components/Textbox";
 import TextAreaForm from "./components/TextAreaForm";
 import { jsonExample, handleJSON } from "./utils/json_handler";
 import { CSVExample, handleCSV } from "./utils/csv_handler";
