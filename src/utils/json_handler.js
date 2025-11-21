@@ -75,12 +75,12 @@ function convertToCSV(jsonData) {
 }
 
 function handleJSON(jsonData) {
-  if (!validateJSON(jsonData)) {
-    console.log("Invalid data");
-    return "";
-  }
+  // if (!validateJSON(jsonData)) {
+  //   console.log("Invalid data");
+  //   return "";
+  // }
 
   return convertToCSV(jsonData);
 }
 
-export { jsonExample, handleJSON };
+export { jsonExample, validateJSON, handleJSON };

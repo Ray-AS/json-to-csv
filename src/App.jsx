@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 import TextAreaForm from "./components/TextAreaForm";
-import { jsonExample, handleJSON } from "./utils/json_handler";
-import { CSVExample, handleCSV } from "./utils/csv_handler";
+import { jsonExample, validateJSON, handleJSON } from "./utils/json_handler";
+import { CSVExample, validateCSV, handleCSV } from "./utils/csv_handler";
 
 function App() {
-  const [CSV, setCSV] = useState("")
+  const [jsonValue, setJSONValue] = useState("");
+  const [CSV, setCSV] = useState("");
 
   function handleJSONSubmit(e) {
     e.preventDefault();
@@ -16,7 +17,7 @@ function App() {
   }
 
   function handleJSONChange(e) {
-    console.log("json change")
+    setJSONValue(e.target.value);
   }
 
   function handleCSVSubmit(e) {
@@ -24,11 +25,11 @@ function App() {
     const formData = new FormData(e.currentTarget);
     const CSVData = Object.fromEntries(formData.entries()).csv;
 
-    handleCSV(CSVData);
+    setJSONValue(JSON.stringify(handleCSV(CSVData)));
   }
 
   function handleCSVChange(e) {
-    setCSV(e.target.value)
+    setCSV(e.target.value);
   }
 
   return (
@@ -36,21 +37,24 @@ function App() {
       <h1>JSON &lt;--&gt; CSV</h1>
       <TextAreaForm
         formID="json-form"
-        submitCallback={handleJSONSubmit}
-        changeCallback={handleJSONChange}
         textAreaName="json"
         textAreaID="json-box"
         textAreaExample={JSON.stringify(jsonExample)}
+        textAreaValue={jsonValue}
+        submitCallback={handleJSONSubmit}
+        changeCallback={handleJSONChange}
+        buttonCondition={validateJSON}
       />
 
       <TextAreaForm
         formID="csv-form"
-        submitCallback={handleCSVSubmit}
-        changeCallback={handleCSVChange}
         textAreaName="csv"
         textAreaID="csv-box"
         textAreaExample={CSVExample}
         textAreaValue={CSV}
+        submitCallback={handleCSVSubmit}
+        changeCallback={handleCSVChange}
+        buttonCondition={validateCSV}
       />
     </>
   );

@@ -11,7 +11,7 @@ export default function TextAreaForm(props) {
         callback={props.changeCallback}
       />
       <br />
-      <button type="submit">Convert</button>
+      <button type="submit" disabled={!props.buttonCondition(props.textAreaValue)}>Convert</button>
     </form>
   );
 }
