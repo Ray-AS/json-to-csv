@@ -54,11 +54,33 @@ function validateJSON(jsonData) {
   return true;
 }
 
+function convertToCSV(jsonData) {
+  jsonData = JSON.parse(jsonData);
+
+  const headers = Object.keys(jsonData[0]);
+  const lines = [headers];
+
+  for (let item of jsonData) {
+    lines.push(Object.values(item));
+  }
+
+  let CSV_string = "";
+
+  for (let line of lines) {
+    CSV_string += line.join(",");
+    CSV_string += "\n";
+  }
+
+  return CSV_string.slice(0, -1);
+}
+
 function handleJSON(jsonData) {
   if (!validateJSON(jsonData)) {
     console.log("Invalid data");
-    return;
+    return "";
   }
+
+  return convertToCSV(jsonData);
 }
 
 export { jsonExample, handleJSON };
