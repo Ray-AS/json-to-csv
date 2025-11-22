@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import TextAreaForm from "./components/TextAreaForm";
+import FileInput from "./components/FileInput";
 import { jsonExample, validateJSON, handleJSON } from "./utils/json_handler";
 import { CSVExample, validateCSV, handleCSV } from "./utils/csv_handler";
 
@@ -45,6 +46,7 @@ function App() {
         changeCallback={handleJSONChange}
         buttonCondition={validateJSON}
       />
+      <FileInput buttonText="Choose JSON File" inputID="json-file" />
 
       <TextAreaForm
         formID="csv-form"
@@ -56,6 +58,7 @@ function App() {
         changeCallback={handleCSVChange}
         buttonCondition={validateCSV}
       />
+      <FileInput buttonText="Choose CSV File" inputID="csv-file" />
     </>
   );
 }
