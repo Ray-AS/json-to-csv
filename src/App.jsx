@@ -9,6 +9,21 @@ function App() {
   const [jsonValue, setJSONValue] = useState("");
   const [CSV, setCSV] = useState("");
 
+  function handleChange(setter) {
+    return (e) => setter(e.target.value);
+  }
+
+  function handleFile(callback) {
+    return (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => callback(event.target.result);
+      reader.readAsText(file);
+    };
+  }
+
   function handleJSONSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -17,20 +32,12 @@ function App() {
     setCSV(handleJSON(jsonData));
   }
 
-  function handleJSONChange(e) {
-    setJSONValue(e.target.value);
-  }
-
   function handleCSVSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const CSVData = Object.fromEntries(formData.entries()).csv;
 
     setJSONValue(JSON.stringify(handleCSV(CSVData)));
-  }
-
-  function handleCSVChange(e) {
-    setCSV(e.target.value);
   }
 
   return (
@@ -43,10 +50,15 @@ function App() {
         textAreaExample={JSON.stringify(jsonExample)}
         textAreaValue={jsonValue}
         submitCallback={handleJSONSubmit}
-        changeCallback={handleJSONChange}
+        changeCallback={handleChange(setJSONValue)}
         buttonCondition={validateJSON}
       />
-      <FileInput buttonText="Choose JSON File" inputID="json-file" />
+      <FileInput
+        buttonText="Choose JSON File"
+        inputID="json-file"
+        accept=".json"
+        fileCallback={handleFile((data) => console.log(data))}
+      />
 
       <TextAreaForm
         formID="csv-form"
@@ -55,10 +67,15 @@ function App() {
         textAreaExample={CSVExample}
         textAreaValue={CSV}
         submitCallback={handleCSVSubmit}
-        changeCallback={handleCSVChange}
+        changeCallback={handleChange(setCSV)}
         buttonCondition={validateCSV}
       />
-      <FileInput buttonText="Choose CSV File" inputID="csv-file" />
+      <FileInput
+        buttonText="Choose CSV File"
+        inputID="csv-file"
+        accept=".csv"
+        fileCallback={handleFile((data) => console.log(data))}
+      />
     </>
   );
 }

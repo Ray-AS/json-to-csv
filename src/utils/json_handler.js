@@ -1,12 +1,12 @@
 const jsonExample = [
   {
     key: "value",
-    key2: "value2",
+    key2: "value2"
   },
   {
     key: "value3",
-    key2: "value4",
-  },
+    key2: "value4"
+  }
 ];
 
 function validateItem(item) {
@@ -75,11 +75,6 @@ function convertToCSV(jsonData) {
 }
 
 function handleJSON(jsonData) {
-  // if (!validateJSON(jsonData)) {
-  //   console.log("Invalid data");
-  //   return "";
-  // }
-
   return convertToCSV(jsonData);
 }
 
