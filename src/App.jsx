@@ -13,13 +13,17 @@ function App() {
     return (e) => setter(e.target.value);
   }
 
-  function handleFile(callback) {
+  function handleFile(validate, setter) {
     return (e) => {
       const file = e.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = (event) => callback(event.target.result);
+      reader.onload = (event) => {
+        if (validate(event.target.result)) {
+          setter(event.target.result);
+        }
+      };
       reader.readAsText(file);
     };
   }
@@ -57,7 +61,7 @@ function App() {
         buttonText="Choose JSON File"
         inputID="json-file"
         accept=".json"
-        fileCallback={handleFile((data) => console.log(data))}
+        fileCallback={handleFile(validateJSON, setJSONValue)}
       />
 
       <TextAreaForm
@@ -74,7 +78,7 @@ function App() {
         buttonText="Choose CSV File"
         inputID="csv-file"
         accept=".csv"
-        fileCallback={handleFile((data) => console.log(data))}
+        fileCallback={handleFile(validateCSV, setCSV)}
       />
     </>
   );
