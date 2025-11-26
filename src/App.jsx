@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import "./styles/App.css";
 import TextAreaForm from "./components/TextAreaForm";
 import FileInput from "./components/FileInput";
 import Export from "./components/Export";
@@ -64,59 +64,69 @@ function App() {
     const formData = new FormData(e.currentTarget);
     const CSVData = Object.fromEntries(formData.entries()).csv;
 
-    setJSONValue(JSON.stringify(handleCSV(CSVData)));
+    setJSONValue(JSON.stringify(handleCSV(CSVData), null, 2));
   }
 
   return (
     <>
       <h1>JSON &lt;--&gt; CSV</h1>
-      <TextAreaForm
-        formID="json-form"
-        textAreaName="json"
-        textAreaID="json-box"
-        textAreaExample={JSON.stringify(jsonExample)}
-        textAreaValue={jsonValue}
-        submitCallback={handleJSONSubmit}
-        changeCallback={handleChange(setJSONValue, "json")}
-        buttonCondition={validateJSON}
-      />
-      <FileInput
-        buttonText="Choose JSON File"
-        inputID="json-file"
-        accept=".json"
-        fileCallback={handleFile(validateJSON, setJSONValue)}
-      />
-      <Export
-        data={jsonValue}
-        buttonCondition={validateJSON}
-        url={jsonURL}
-        download="json_export.json"
-        exportText="Export JSON Data"
-      />
+      <main>
+        <section className="json-section">
+          <TextAreaForm
+            formID="json-form"
+            textAreaName="json"
+            textAreaID="json-box"
+            textAreaExample={JSON.stringify(jsonExample, null, 2)}
+            textAreaValue={jsonValue}
+            submitCallback={handleJSONSubmit}
+            changeCallback={handleChange(setJSONValue, "json")}
+            buttonCondition={validateJSON}
+          />
+          <div className="file-handling-buttons">
+            <FileInput
+              buttonText="Choose JSON File"
+              inputID="json-file"
+              accept=".json"
+              fileCallback={handleFile(validateJSON, setJSONValue)}
+            />
+            <Export
+              data={jsonValue}
+              buttonCondition={validateJSON}
+              url={jsonURL}
+              download="json_export.json"
+              exportText="Export JSON Data"
+            />
+          </div>
+        </section>
 
-      <TextAreaForm
-        formID="csv-form"
-        textAreaName="csv"
-        textAreaID="csv-box"
-        textAreaExample={CSVExample}
-        textAreaValue={CSV}
-        submitCallback={handleCSVSubmit}
-        changeCallback={handleChange(setCSV, "csv")}
-        buttonCondition={validateCSV}
-      />
-      <FileInput
-        buttonText="Choose CSV File"
-        inputID="csv-file"
-        accept=".csv"
-        fileCallback={handleFile(validateCSV, setCSV)}
-      />
-      <Export
-        data={CSV}
-        buttonCondition={validateCSV}
-        url={csvURL}
-        download="csv_export.csv"
-        exportText="Export CSV Data"
-      />
+        <section className="csv-section">
+          <TextAreaForm
+            formID="csv-form"
+            textAreaName="csv"
+            textAreaID="csv-box"
+            textAreaExample={CSVExample}
+            textAreaValue={CSV}
+            submitCallback={handleCSVSubmit}
+            changeCallback={handleChange(setCSV, "csv")}
+            buttonCondition={validateCSV}
+          />
+          <div className="file-handling-buttons">
+            <FileInput
+              buttonText="Choose CSV File"
+              inputID="csv-file"
+              accept=".csv"
+              fileCallback={handleFile(validateCSV, setCSV)}
+            />
+            <Export
+              data={CSV}
+              buttonCondition={validateCSV}
+              url={csvURL}
+              download="csv_export.csv"
+              exportText="Export CSV Data"
+            />
+          </div>
+        </section>
+      </main>
     </>
   );
 }

@@ -8,7 +8,11 @@ export default function Export(props) {
   );
 
   return (
-    <button type="button" disabled={!props.buttonCondition(props.data)}>
+    <button
+      type="button"
+      className="export-button"
+      disabled={!props.buttonCondition(props.data)}
+    >
       {display}
     </button>
   );

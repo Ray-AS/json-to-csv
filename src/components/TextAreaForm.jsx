@@ -3,6 +3,14 @@ import Textbox from "./Textbox";
 export default function TextAreaForm(props) {
   return (
     <form id={props.formID} onSubmit={props.submitCallback}>
+      <button
+        type="submit"
+        className="convert-button"
+        disabled={!props.buttonCondition(props.textAreaValue)}
+      >
+        Convert
+      </button>
+      <br />
       <Textbox
         name={props.textAreaName}
         id={props.textAreaID}
@@ -10,13 +18,6 @@ export default function TextAreaForm(props) {
         value={props.textAreaValue}
         callback={props.changeCallback}
       />
-      <br />
-      <button
-        type="submit"
-        disabled={!props.buttonCondition(props.textAreaValue)}
-      >
-        Convert
-      </button>
     </form>
   );
 }

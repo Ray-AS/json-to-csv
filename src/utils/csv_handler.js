@@ -1,4 +1,4 @@
-const CSVExample = "Key,Key2\n" + "value,value2\n" + "value3,value4\n";
+const CSVExample = "Name,Age\n" + "Bob,50\n" + "Shaz,100\n";
 
 function validateItems(items) {
   if (items.some((item) => item === "" || item === null)) {

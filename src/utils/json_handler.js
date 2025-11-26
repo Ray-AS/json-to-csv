@@ -1,11 +1,11 @@
 const jsonExample = [
   {
-    key: "value",
-    key2: "value2"
+    name: "Bob",
+    age: "50"
   },
   {
-    key: "value3",
-    key2: "value4"
+    name: "Shaz",
+    age: "100"
   }
 ];
 
