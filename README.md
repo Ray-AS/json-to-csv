@@ -1,6 +1,6 @@
 # JSON ↔ CSV Converter
 
-A React app for converting data between JSON and CSV. It supports pasting text directly uploading files, validating input, and exporting the converted result.
+A React app for converting data between JSON and CSV. It supports pasting text directly, uploading files, validating input, and exporting the converted result.
 
 ## Features
 
