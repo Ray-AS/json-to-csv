@@ -69,7 +69,7 @@ function App() {
 
   return (
     <>
-      <h1>JSON &lt;--&gt; CSV</h1>
+      <h1>JSON &harr; CSV</h1>
       <main>
         <section className="json-section">
           <TextAreaForm
